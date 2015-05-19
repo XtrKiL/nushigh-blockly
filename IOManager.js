@@ -7,10 +7,12 @@ function downloadURI() {
   var link = document.createElement("a");
   var d = new Date();
   var fname =window.prompt("Enter Filename?");
-  if(fname =='')fname = d.toString();
-  link.download = fname+'.nushblock';
-  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace)))
-  link.click();
+  if(fname){
+	  if(fname =='')fname = d.toString();
+		  link.download = fname+'.nushblock';
+		  link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace)))
+		  link.click();
+  }
 }
 
 function upload(files){
