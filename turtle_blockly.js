@@ -15,7 +15,7 @@
 		
 		Blockly.JavaScript['forward'] = function(block) {
 		  var value_forward = Blockly.JavaScript.valueToCode(block, 'forward', Blockly.JavaScript.ORDER_ATOMIC);
-		  var code = 'forward('+value_forward+')';
+		  var code = 'forward('+value_forward+');';
 		  return code;
 		};		
 		
@@ -43,7 +43,7 @@
 		Blockly.JavaScript['right'] = function(block) {
 		  var angle = block.getFieldValue('angle');
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'right('+angle+')';
+		  var code = 'right('+angle+');';
 		  return code;
 		};
 		
@@ -72,7 +72,7 @@
 		Blockly.JavaScript['left'] = function(block) {
 		  var angle = block.getFieldValue('angle');
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'left('+angle+')';
+		  var code = 'left('+angle+');';
 		  return code;
 		};
 		
@@ -113,7 +113,7 @@
 		  var value_x = Blockly.JavaScript.valueToCode(block, 'x', Blockly.JavaScript.ORDER_ATOMIC);
 		  var value_y = Blockly.JavaScript.valueToCode(block, 'y', Blockly.JavaScript.ORDER_ATOMIC);
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'goto('+value_x+','+value_y+')';
+		  var code = 'goto('+value_x+','+value_y+');';
 		  return code;
 		};
 
@@ -134,7 +134,7 @@
 
 		Blockly.JavaScript['clear'] = function(block) {
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'clear()';
+		  var code = 'clear();';
 		  return code;
 		};
 
@@ -171,8 +171,8 @@
 		Blockly.JavaScript['pen'] = function(block) {
 		  var dropdown_pen = block.getFieldValue('pen');
 		  var code = '';
-		  if(dropdown_pen == 1) code = 'pendown()';
-		  else code = 'penup()';
+		  if(dropdown_pen == 1) code = 'pendown();';
+		  else code = 'penup();';
 		  
 		  return code;
 		};
@@ -192,7 +192,7 @@
 		
 		Blockly.JavaScript['reset'] = function(block) {
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'reset()';
+		  var code = 'reset();';
 		  return code;
 		};
 		
@@ -226,7 +226,7 @@
 		Blockly.JavaScript['width'] = function(block) {
 		  var value_width = Blockly.JavaScript.valueToCode(block, 'width', Blockly.JavaScript.ORDER_ATOMIC);
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'width('+value_width+')';
+		  var code = 'width('+value_width+');';
 		  return code;
 		};
 
@@ -261,7 +261,7 @@ from David: http://stackoverflow.com/users/1047797/david
 		
 		Blockly.JavaScript['block_colour'] = function(block) {
 		  var value_colour = Blockly.JavaScript.valueToCode(block, 'hex_colour', Blockly.JavaScript.ORDER_ATOMIC);
-		  return 'colour('+hexToRgb(value_colour.slice(2))+',1)';
+		  return 'colour('+hexToRgb(value_colour.slice(2))+',1);';
 		};
 		
 		Blockly.Python['block_colour'] = function(block) {
@@ -295,7 +295,7 @@ from David: http://stackoverflow.com/users/1047797/david
 		Blockly.JavaScript['writeatlocation'] = function(block) {
 		  var value_write = Blockly.JavaScript.valueToCode(block, 'write', Blockly.JavaScript.ORDER_ATOMIC);
 		  // TODO: Assemble JavaScript into code variable.
-		  var code = 'write('+value_write+')';
+		  var code = 'write('+value_write+');';
 		  return code;
 		};
 
@@ -316,8 +316,8 @@ from David: http://stackoverflow.com/users/1047797/david
 		Blockly.JavaScript['showturtle'] = function(block) {
 		  var checkbox_show = block.getFieldValue('show') == 'TRUE';
 		  var code = '';
-		  if(checkbox_show)code ='showTurtle()';
-		  else code = 'hideTurtle()';
+		  if(checkbox_show)code ='showTurtle();';
+		  else code = 'hideTurtle();';
 		  return code;
 		};
 
@@ -354,8 +354,8 @@ from David: http://stackoverflow.com/users/1047797/david
 		Blockly.JavaScript['wrap'] = function(block) {
 		  var checkbox_wrap = block.getFieldValue('wrap') == 'TRUE';
 		  var code = '';
-		  if(checkbox_wrap)code ='wrap(true)';
-		  else code = 'wrap(false)';
+		  if(checkbox_wrap)code ='wrap(true);';
+		  else code = 'wrap(false);';
 		  return code;
 		};
 /*
