@@ -362,9 +362,7 @@ $('#command').change(function () {
 });
 
 function moveTurtle() {
-   console.log('abc')
    var code = Blockly.JavaScript.workspaceToCode(workspace);
-   console.log(code)
    eval(code);
 }
 

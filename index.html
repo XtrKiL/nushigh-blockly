@@ -11,7 +11,8 @@ save and load state. done
 
 <html>
 	<head>
-		<title>NUS High Blockly</title>
+		<title>Blocks@NUSH</title>
+		<link rel="shortcut icon" href="http://sstatic.net/stackoverflow/img/favicon.ico">
 	</head>
 	<body>
 		<center>
@@ -26,18 +27,14 @@ save and load state. done
 		<script type="text/javascript" src="./Javascript Turtle_files/jquery-1.6.4.min.js"></script>
 
 		<h1 style ="font-family:Calibri"><u>NUS High Blockly</u></h1>
-		<div id="blocklyDiv" style="height: 700px; width: 700px; float:right"></div>		
+		<div id="blocklyDiv" style="height: 550px; width: 800px; float:right"></div>		
 		<h3 style ="font-family:Times New Roman">Turtle Graphics</h3>
-            <canvas id="turtlecanvas" width="300" height="250"></canvas>
-            <canvas id="imagecanvas" width="300" height="300" style="display:none;float:left">
+            <canvas id="turtlecanvas" width="500" height="250"></canvas>
+            <canvas id="imagecanvas" width="500" height="250" style="display:none;float:left">
 		</canvas>
 		
 		<p>
-			<button onclick="runCode()">Run The Code!</button> 
-			<button onclick="moveTurtle()">Run Graphics</button>	
-		</p>
-		
-		<p>
+			<button onclick="runCode()" style ="font-size:18px">Blockly Runs~</button> <br><br>
 			<button
 				onclick="downloadURI()">
 				Download Code!
@@ -47,9 +44,9 @@ save and load state. done
 		
 		<div>
 			<h4 style ="font-family:Arial;text-align:left;margin-left:10px">Console Output:</h4>
-				<textarea id ="outputBox" style = 'border:3px solid blue;width:600px; height:100px; margin: 0px 5px 0px 5px '></textarea>
-			<h4 style ="font-family:Arial;text-align:left;margin-left:10px">For Upload To Coursemology:</h4>
-				<textarea id="textarea" style="border:3px solid red; width:600px; height:100px; margin: 0px 5px 0px 5px">Copy the text here!</textarea>
+				<textarea id ="outputBox" style = 'border:3px solid blue;width:500px; height:120px; margin: 0px 5px 0px 5px '></textarea>
+			<h4 style ="font-family:Arial">For Upload To Coursemology:</h4>
+				<textarea id="textarea" style="border:3px solid red; width:800px; height:100px; margin: 0px 5px 0px 5px">Copy the text here!</textarea>
 		</div>
 	    
 		<xml id="toolbox" style="display: none">
