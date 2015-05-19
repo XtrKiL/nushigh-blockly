@@ -499,8 +499,13 @@ Others
 				defineDownRange() + '(' + start + ', ' + end + ', ' + inc + ')';
 		  };
 				  // All parameters are integers.
-					// Count up.
+					// Count up
+					if(Blockly.isNumber(argument1)){
+						argument1++;
+					}
+					else{
 					argument1 = "("+argument1 +"+1)";
+					}
 					if (argument0 == 0 && increment == 1) {
 					  // If starting index is 0, omit it.
 					  range = argument1;
