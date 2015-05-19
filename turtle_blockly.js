@@ -377,7 +377,7 @@ Others
 		
 		Blockly.JavaScript['consoleprint'] = function(block) {
 		  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
-		  var code = "document.getElementById('outputBox').value += "+value_input+"\+'\\r\\n'";
+		  var code = "document.getElementById('outputBox').value += "+"'\:\:\: ' \+"+value_input+"\+'\\r\\n'";
 		  return code;
 		};
 		
