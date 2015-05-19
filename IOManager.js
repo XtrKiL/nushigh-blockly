@@ -21,6 +21,7 @@ if (file) {
     reader.readAsText(file, "UTF-8");
     reader.onload = function (evt) {
 		var xml = Blockly.Xml.textToDom(evt.target.result);
+		Blockly.mainWorkspace.clear();
 		Blockly.Xml.domToWorkspace(workspace, xml);
     }
     reader.onerror = function (evt) {

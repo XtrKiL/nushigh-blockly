@@ -25,10 +25,11 @@ save and load state. done
 		<script src="aes.js"></script>
 		<script type="text/javascript" src="./Javascript Turtle_files/jquery-1.6.4.min.js"></script>
 
-		<h1>Edit code here!</h1>			
-		<h4>Canvas</h4>
-            <canvas id="turtlecanvas" width="300" height="300"></canvas>
-            <canvas id="imagecanvas" width="300" height="300" style="display:none">
+		<h1 style ="font-family:Calibri"><u>NUS High Blockly</u></h1>
+		<div id="blocklyDiv" style="height: 700px; width: 700px; float:right"></div>		
+		<h3 style ="font-family:Times New Roman">Turtle Graphics</h3>
+            <canvas id="turtlecanvas" width="300" height="250"></canvas>
+            <canvas id="imagecanvas" width="300" height="300" style="display:none;float:left">
 		</canvas>
 		
 		<p>
@@ -43,11 +44,15 @@ save and load state. done
 			</button>
 			<input type="file" id="inputFile" onchange ="upload(this.files)">
 		</p>
-		<textarea	id ="outputBox" style = 'border:3px solid blue;width:600px; height:100px'></textarea>
 		
-		<div id="blocklyDiv" style="height: 600px; width: 1000px;"></div>
-		
-	    <xml id="toolbox" style="display: none">
+		<div>
+			<h4 style ="font-family:Arial;text-align:left;margin-left:10px">Console Output:</h4>
+				<textarea id ="outputBox" style = 'border:3px solid blue;width:600px; height:100px; margin: 0px 5px 0px 5px '></textarea>
+			<h4 style ="font-family:Arial;text-align:left;margin-left:10px">For Upload To Coursemology:</h4>
+				<textarea id="textarea" style="border:3px solid red; width:600px; height:100px; margin: 0px 5px 0px 5px">Copy the text here!</textarea>
+		</div>
+	    
+		<xml id="toolbox" style="display: none">
 		<category id="catTurtle" name ="Turtle">
 		  <block type="forward"></block>
 		  <block type="right"></block>
@@ -270,7 +275,6 @@ save and load state. done
 		<category id="catFunctions" custom="PROCEDURE" name="Functions"></category>
 	  </xml>
 
-		<textarea id="textarea" style="border:3px solid red; width:600px; height:100px">Copy the text here!</textarea>
 			
 		<script>
 		var workspace = Blockly.inject('blocklyDiv',
@@ -278,7 +282,7 @@ save and load state. done
 		
 		function myUpdateFunction() {
 			var code = Blockly.Python.workspaceToCode(workspace);
-			document.getElementById('textarea').value = shift_cipher(code,"ringo!");
+			document.getElementById('textarea').value = code;
 			}
 		workspace.addChangeListener(myUpdateFunction);
 		
