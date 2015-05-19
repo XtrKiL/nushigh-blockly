@@ -386,3 +386,132 @@ Others
 		  var code = "print("+value_input+")";
 		  return code;
 		};
+		
+		
+		Blockly.Blocks['simple_controls_for'] = {
+		  /**
+		   * Block for 'for' loop.
+		   * @this Blockly.Block
+		   */
+		  init: function() {
+			this.setHelpUrl(Blockly.Msg.CONTROLS_FOR_HELPURL);
+			this.setColour(Blockly.Blocks.loops.HUE);
+			this.appendDummyInput()
+				.appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH)
+				.appendField(new Blockly.FieldVariable(null), 'VAR');
+			this.interpolateMsg(Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY,
+								['FROM', 'Number', Blockly.ALIGN_RIGHT],
+								['TO', 'Number', Blockly.ALIGN_RIGHT],
+								['BY', 'Number', Blockly.ALIGN_RIGHT],
+								Blockly.ALIGN_RIGHT);
+			this.appendStatementInput('DO')
+				.appendField(Blockly.Msg.CONTROLS_FOR_INPUT_DO);
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(true);
+			// Assign 'this' to a variable for use in the tooltip closure below.
+			var thisBlock = this;
+			this.setTooltip(function() {
+			  return Blockly.Msg.CONTROLS_FOR_TOOLTIP.replace('%1',
+				  thisBlock.getFieldValue('VAR'));
+			});
+		  },
+		  /**
+		   * Return all variables referenced by this block.
+		   * @return {!Array.<string>} List of variable names.
+		   * @this Blockly.Block
+		   */
+		  getVars: function() {
+			return [this.getFieldValue('VAR')];
+		  },
+		  /**
+		   * Notification that a variable is renaming.
+		   * If the name matches one of this block's variables, rename it.
+		   * @param {string} oldName Previous name of variable.
+		   * @param {string} newName Renamed variable.
+		   * @this Blockly.Block
+		   */
+		  renameVar: function(oldName, newName) {
+			if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+			  this.setFieldValue(newName, 'VAR');
+			}
+		  },
+		  /**
+		   * Add menu option to create getter block for loop variable.
+		   * @param {!Array} options List of menu options to add to.
+		   * @this Blockly.Block
+		   */
+		  customContextMenu: function(options) {
+			if (!this.isCollapsed()) {
+			  var option = {enabled: true};
+			  var name = this.getFieldValue('VAR');
+			  option.text = Blockly.Msg.VARIABLES_SET_CREATE_GET.replace('%1', name);
+			  var xmlField = goog.dom.createDom('field', null, name);
+			  xmlField.setAttribute('name', 'VAR');
+			  var xmlBlock = goog.dom.createDom('block', null, xmlField);
+			  xmlBlock.setAttribute('type', 'variables_get');
+			  option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+			  options.push(option);
+			}
+		  }
+		};
+		
+		Blockly.Python['simple_controls_for'] = function(block) {
+		  // For loop.
+		  var variable0 = Blockly.Python.variableDB_.getName(
+			  block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+		  var argument0 = Blockly.Python.valueToCode(block, 'FROM',
+			  Blockly.Python.ORDER_NONE) || '0';
+		  var argument1 = Blockly.Python.valueToCode(block, 'TO',
+			  Blockly.Python.ORDER_NONE) || '0';
+		  var increment = Blockly.Python.valueToCode(block, 'BY',
+			  Blockly.Python.ORDER_NONE) || '1';
+		  var branch = Blockly.Python.statementToCode(block, 'DO');
+		  branch = Blockly.Python.addLoopTrap(branch, block.id) ||
+			  Blockly.Python.PASS;
+
+		  var code = '';
+		  var range;
+
+		  // Helper functions.
+		  var defineUpRange = function() {
+			return Blockly.Python.provideFunction_(
+				'upRange',
+				['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ +
+					'(start, stop, step):',
+				 '  while start <= stop:',
+				 '    yield start',
+				 '    start += abs(step)']);
+		  };
+		  var defineDownRange = function() {
+			return Blockly.Python.provideFunction_(
+				'downRange',
+				['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ +
+					'(start, stop, step):',
+				 '  while start >= stop:',
+				 '    yield start',
+				 '    start -= abs(step)']);
+		  };
+		  // Arguments are legal Python code (numbers or strings returned by scrub()).
+		  var generateUpDownRange = function(start, end, inc) {
+			return '(' + start + ' <= ' + end + ') and ' +
+				defineUpRange() + '(' + start + ', ' + end + ', ' + inc + ') or ' +
+				defineDownRange() + '(' + start + ', ' + end + ', ' + inc + ')';
+		  };
+				  // All parameters are integers.
+					// Count up.
+					argument1 = "("+argument1 +"+1)";
+					if (argument0 == 0 && increment == 1) {
+					  // If starting index is 0, omit it.
+					  range = argument1;
+					} else {
+					  range = argument0 + ', ' + argument1;
+					}
+					// If increment isn't 1, it must be explicit.
+					if (increment != 1) {
+					  range += ', ' + increment;
+					}
+				  range = 'range(' + range + ')';
+		  code += 'for ' + variable0 + ' in ' + range + ':\n' + branch;
+		  return code;
+		};
